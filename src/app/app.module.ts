@@ -10,12 +10,12 @@ import { ButtonModule } from 'primeng/button';
 import { DividerModule } from 'primeng/divider';
 import { CardModule } from 'primeng/card';
 import { AccordionModule } from 'primeng/accordion';
-import { LoginComponentComponent } from './login-component/login-component.component';
-import { SingupComponent } from './singup/singup.component';
+import { LoginComponentComponent } from './components/auth/login-component/login-component.component';
+import { SingupComponent } from './components/auth/singup/singup.component';
 import { RouterModule, Routes } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
-import { HomeComponent } from './home/home.component'; // Importă ReactiveFormsModule
+import { HomeComponent } from './components/home/home.component'; 
 
 
 const routes: Routes = [
