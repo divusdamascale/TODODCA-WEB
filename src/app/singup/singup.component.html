@@ -1,0 +1,41 @@
+<div class="flex">
+
+<div class="card m-auto">
+
+    <form [formGroup]="registerForm" (ngSubmit)="registerUser()">
+   
+      <div class="flex flex-column md:flex-row">
+      
+        <div class="w-full md:w-5 flex flex-column align-items-center justify-content-center gap-3 py-5">
+          <h1>Register</h1>
+          <div class="flex flex-wrap justify-content-center align-items-center gap-2">
+            <label class="w-6rem">Username</label>
+            <input pInputText id="username" type="text" class="w-12rem" formControlName="username" />
+          </div>
+          <div class="flex flex-wrap justify-content-center align-items-center gap-2">
+            <label class="w-6rem">Email</label>
+            <input pInputText id="email" type="email" class="w-12rem" formControlName="email" />
+          </div>
+          <div class="flex flex-wrap justify-content-center align-items-center gap-2">
+            <label class="w-6rem">Password</label>
+            <input pInputText id="password" type="password" class="w-12rem" formControlName="password" />
+          </div>
+          <div class="flex flex-wrap justify-content-center align-items-center gap-2">
+            <label class="w-6rem">Last Name</label>
+            <input pInputText id="fname" type="text" class="w-12rem" formControlName="lastname" />
+          </div>
+          <div class="flex flex-wrap justify-content-center align-items-center gap-2">
+            <label class="w-6rem">First Name</label>
+            <input pInputText id="lname" type="text" class="w-12rem" formControlName="firstname" />
+          </div>
+          <div class="flex flex-wrap justify-content-center align-items-center gap-2">
+            <label class="w-6rem">Birth Date</label>
+            <input pInputText id="datebirth" type="date" class="w-12rem" formControlName="datebirth" />
+          </div>
+          <p-button label="Register" icon="pi pi-user" type="submit" styleClass="w-10rem mx-auto"></p-button>
+          <p-button label="Back" routerLink="/login" styleClass="w-10rem mx-auto"></p-button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
