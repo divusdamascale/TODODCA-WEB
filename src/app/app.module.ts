@@ -16,6 +16,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HomeComponent } from './components/home/home.component'; 
+import { TimelineModule } from 'primeng/timeline';
 
 
 const routes: Routes = [
@@ -44,6 +45,7 @@ const routes: Routes = [
     AccordionModule,
     FormsModule,
     ReactiveFormsModule,
+    TimelineModule
     
    
   ],
