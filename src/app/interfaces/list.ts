@@ -4,4 +4,5 @@ export interface List {
     name?: string;
     description?: string;
     inventoryStatus?: string;
+    date?:string;
 }

@@ -36,9 +36,10 @@
                     <th style="width: 4rem">
                         <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
                     </th>
-                    <th pSortableColumn="name" style="min-width:15rem">Name <p-sortIcon field="name"></p-sortIcon></th>
-                    <th pSortableColumn="inventoryStatus" style="min-width:10rem">Status <p-sortIcon field="inventoryStatus"></p-sortIcon></th>
-                    <th></th>
+                    <th pSortableColumn="name" style="min-width:15rem">Name <i class="pi pi-sort-alt"></i></th>
+                    <th pSortableColumn="inventoryStatus" style="min-width:10rem">Status <i class="pi pi-tag"></i></th>
+                    <th pSortableColumn="date" style="min-width:10rem">Date <i class="pi pi-clock"></i></th>
+                    <th>User Option <i class="pi pi-cog"></i></th>
                 </tr>
             </ng-template>
             <ng-template pTemplate="body" let-list>
@@ -51,9 +52,12 @@
                     <td>
                         <p-tag [value]="list.inventoryStatus" [severity]="getSeverity(list.inventoryStatus)"></p-tag>
                     </td>
+                    <td>{{ list.date }}</td>
                     <td>
+                        <button pButton pRipple icon="pi pi-eye" class="p-button-rounded p-button-warning mr-2"></button>
                         <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-success mr-2" (click)="editList(list)"></button>
                         <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-danger" (click)="deleteList(list)"></button>
+                        
                     </td>
                 </tr>
             </ng-template>

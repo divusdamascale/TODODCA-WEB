@@ -9,7 +9,8 @@ export class ListService {
                 code: 'f230fh0g3',
                 name: 'Bamboo Watch',
                 description: 'List Description',
-                inventoryStatus: 'no-status'
+                inventoryStatus: 'no-status',
+                date:'02-11-2023'
             },
           
         ];
