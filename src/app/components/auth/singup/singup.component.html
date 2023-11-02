@@ -1,41 +1,43 @@
-<div class="flex">
+<div class="surface-ground flex align-items-center justify-content-center min-h-screen">
+  <div class="flex flex-column align-items-center justify-content-center">
+      <div style="border-radius:56px; padding:0.3rem; background: linear-gradient(180deg, var(--primary-color) 10%, rgba(0, 140, 255, 0) 30%);">
+          
+          <div class="w-full surface-card py-8 px-5 sm:px-8" style="border-radius:53px">
+              <form [formGroup]="registerForm" (ngSubmit)="registerUser()">
+              <div class="text-center mb-5">
+                  <i class="pi pi-user-plus" style="font-size: 5rem; color: rgb(8, 98, 30);"></i>
+                  <div class="text-900 text-3xl font-medium mb-3">Welcome to .....!</div>
+                  <span class="text-600 font-medium">Sign up to continue</span>
+              </div>
 
-<div class="card m-auto">
+              <div>
+              
+                      <label class="block text-900 text-xl font-medium mb-2">Username</label>
+                      <input pInputText id="username" type="text"  class="w-full md:w-25rem mb-3"  formControlName="username" />
+                   
+                      <label class="block text-900 text-xl font-medium mb-2">Email</label>
+                      <input pInputText id="email" type="email"  class="w-full md:w-25rem mb-3" formControlName="email" />
+                     
+                      <label  class="block text-900 font-medium text-xl mb-2">Password</label>
+                      <input pInputText id="password" type="password" class="w-full md:w-25rem mb-3"  formControlName="password"/>
+                      
+                      <label class="block text-900 text-xl font-medium mb-2">Last Name</label>
+                      <input pInputText id="lname" type="text"  class="w-full md:w-25rem mb-3"  formControlName="lastname" />
 
-    <form [formGroup]="registerForm" (ngSubmit)="registerUser()">
-   
-      <div class="flex flex-column md:flex-row">
-      
-        <div class="w-full md:w-5 flex flex-column align-items-center justify-content-center gap-3 py-5">
-          <h1>Register</h1>
-          <div class="flex flex-wrap justify-content-center align-items-center gap-2">
-            <label class="w-6rem">Username</label>
-            <input pInputText id="username" type="text" class="w-12rem" formControlName="username" />
+                      <label class="block text-900 text-xl font-medium mb-2">First Name</label>
+                      <input pInputText id="fname" type="text"  class="w-full md:w-25rem mb-3"  formControlName="firstname" />
+
+                      <label class="block text-900 text-xl font-medium mb-2">Date Birth</label>
+                      <input pInputText id="datebirth" type="date"  class="w-full md:w-25rem mb-3"  formControlName="datebirth" />
+                      
+                  <div class="flex align-items-center justify-content-between mb-5 gap-5">
+                      
+                     
+                  </div>
+                  <button pButton pRipple label="Sign Up" class="w-full p-3 text-xl p-button-outlined p-button-help" type="submit"></button>
+              </div>
+          </form>
           </div>
-          <div class="flex flex-wrap justify-content-center align-items-center gap-2">
-            <label class="w-6rem">Email</label>
-            <input pInputText id="email" type="email" class="w-12rem" formControlName="email" />
-          </div>
-          <div class="flex flex-wrap justify-content-center align-items-center gap-2">
-            <label class="w-6rem">Password</label>
-            <input pInputText id="password" type="password" class="w-12rem" formControlName="password" />
-          </div>
-          <div class="flex flex-wrap justify-content-center align-items-center gap-2">
-            <label class="w-6rem">Last Name</label>
-            <input pInputText id="fname" type="text" class="w-12rem" formControlName="lastname" />
-          </div>
-          <div class="flex flex-wrap justify-content-center align-items-center gap-2">
-            <label class="w-6rem">First Name</label>
-            <input pInputText id="lname" type="text" class="w-12rem" formControlName="firstname" />
-          </div>
-          <div class="flex flex-wrap justify-content-center align-items-center gap-2">
-            <label class="w-6rem">Birth Date</label>
-            <input pInputText id="datebirth" type="date" class="w-12rem" formControlName="datebirth" />
-          </div>
-          <p-button label="Register" icon="pi pi-user" type="submit" styleClass="w-10rem mx-auto"></p-button>
-          <p-button label="Back" routerLink="/login" styleClass="w-10rem mx-auto"></p-button>
-        </div>
       </div>
-    </form>
   </div>
 </div>
