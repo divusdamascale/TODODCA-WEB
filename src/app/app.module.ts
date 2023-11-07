@@ -17,6 +17,8 @@ import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HomeComponent } from './components/home/home.component'; 
 import { TimelineModule } from 'primeng/timeline';
+import { HttpClientModule } from '@angular/common/http';
+import { AuthService } from './services/auth.service';
 
 
 const routes: Routes = [
@@ -45,11 +47,10 @@ const routes: Routes = [
     AccordionModule,
     FormsModule,
     ReactiveFormsModule,
-    TimelineModule
-    
-   
+    TimelineModule,
+    HttpClientModule
   ],
-  providers: [],
+  providers: [AuthService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
