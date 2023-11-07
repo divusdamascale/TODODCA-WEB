@@ -2,10 +2,9 @@
 <div class="container">
     <div class="navbar text-center shadow-2" [style]="{height: '100px'}">
       <div class="center pt-5">
-        <p-button routerLink="/signup" label="Sign up" icon="pi pi-user" class="mr-3" [text]="true" [raised]="true" severity="success"></p-button>
         
-        <p-button routerLink="/login" label="Sign in" icon="pi pi-lock" [text]="true" [raised]="true" severity="help"></p-button>
-      
+        <button pButton pRipple label="Sign up" routerLink="/signup" icon="pi pi-user" class="p-button-text p-button-success"></button>
+        <button pButton pRipple label="Sign in" routerLink="/login" icon="pi pi-lock" class="p-button-text p-button-help"></button>    
     
       </div>
     </div>
