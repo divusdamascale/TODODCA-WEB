@@ -3,8 +3,6 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { Component } from '@angular/core';
-
 import { InputTextModule } from 'primeng/inputtext';
 import { ButtonModule } from 'primeng/button';
 import { DividerModule } from 'primeng/divider';
@@ -17,8 +15,19 @@ import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HomeComponent } from './components/home/home.component'; 
 import { TimelineModule } from 'primeng/timeline';
-import { HttpClientModule } from '@angular/common/http';
-import { AuthService } from './services/auth.service';
+import { ListComponent } from './list/list/list.component';
+import { TableModule } from 'primeng/table';
+import { DialogModule } from 'primeng/dialog';
+import { TagModule } from 'primeng/tag';
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
+import { ToastModule } from 'primeng/toast';
+import { ToolbarModule } from 'primeng/toolbar';
+import { FileUploadModule } from 'primeng/fileupload';
+// import * as listserviceTs from 'D:/proiect ciuca/todo/src/app/services/listservice';
+import { RatingModule } from 'primeng/rating';
+import { DropdownModule } from 'primeng/dropdown';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { CheckboxModule } from 'primeng/checkbox';
 
 
 const routes: Routes = [
@@ -26,6 +35,8 @@ const routes: Routes = [
   { path: 'home', component: HomeComponent },
   { path: 'login', component: LoginComponentComponent },
   { path: 'signup', component: SingupComponent },
+  { path: 'list', component: ListComponent },
+
   // Alte rute pot fi adăugate aici
 ];
 
@@ -34,7 +45,8 @@ const routes: Routes = [
     AppComponent,
     LoginComponentComponent,
     SingupComponent,
-    HomeComponent
+    HomeComponent,
+    // ListComponent
   ],
   imports: [
     BrowserModule,
@@ -48,9 +60,20 @@ const routes: Routes = [
     FormsModule,
     ReactiveFormsModule,
     TimelineModule,
-    HttpClientModule
+    TableModule,
+    DialogModule,
+    TagModule,
+    ConfirmDialogModule,
+    ToastModule,
+    ToolbarModule,
+    FileUploadModule,
+    RatingModule,
+    DropdownModule,
+    BrowserAnimationsModule,
+    CheckboxModule
+   
   ],
-  providers: [AuthService],
+  // providers: [listserviceTs.ListService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
