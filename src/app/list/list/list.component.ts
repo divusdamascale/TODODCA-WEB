@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ConfirmationService, MessageService } from 'primeng/api';
-import { List } from 'D:/proiect ciuca/todo/src/app/interfaces/list';
-import { ListService } from 'D:/proiect ciuca/todo/src/app/services/listservice';
+import { List } from 'src/app/interfaces/list';
+import { ListService } from 'src/app/services/listservice';
 
 @Component({
   selector: 'app-list',

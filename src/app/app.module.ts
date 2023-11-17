@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { InputTextModule } from 'primeng/inputtext';
@@ -23,7 +22,7 @@ import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { ToastModule } from 'primeng/toast';
 import { ToolbarModule } from 'primeng/toolbar';
 import { FileUploadModule } from 'primeng/fileupload';
-// import * as listserviceTs from 'D:/proiect ciuca/todo/src/app/services/listservice';
+import * as listserviceTs from 'src/app/services/listservice';
 import { RatingModule } from 'primeng/rating';
 import { DropdownModule } from 'primeng/dropdown';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -46,7 +45,7 @@ const routes: Routes = [
     LoginComponentComponent,
     SingupComponent,
     HomeComponent,
-    // ListComponent
+    ListComponent
   ],
   imports: [
     BrowserModule,
@@ -73,7 +72,7 @@ const routes: Routes = [
     CheckboxModule
    
   ],
-  // providers: [listserviceTs.ListService],
+  providers: [listserviceTs.ListService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
