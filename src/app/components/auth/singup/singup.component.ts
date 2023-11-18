@@ -47,23 +47,9 @@ export class SingupComponent {
       },
       (error) =>
       {
-        console.error("A aparut o eroare!");
-        if(!this.lastErrorTimeStamp || now - this.lastErrorTimeStamp > minTimeBetweenToasts)
-        { 
-        this.messageService.add({ severity: 'error', summary: 'ERROR!', detail: 'A aparut o eroare la creearea contului!', life: 3000 });
-        this.lastErrorTimeStamp = now;
+        console.log(error);
       }
-
-      }
-      );
-     
-    }
-    else {
-      if(!this.lastErrorTimeStamp || now - this.lastErrorTimeStamp > minTimeBetweenToasts)
-      {
-      this.messageService.add({ severity: 'warn', summary: 'WARNING!', detail: 'Ai lasat campuri necompletate!', life: 3000 });
-        this.lastErrorTimeStamp = now;
-    }
+      )
     }
   }
 }
