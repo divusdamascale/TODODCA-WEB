@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-singup',
@@ -10,7 +11,7 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 export class SingupComponent {
   registerForm: FormGroup;
 
-  constructor(private formBuilder: FormBuilder) {
+  constructor(private formBuilder: FormBuilder,private authService:AuthService) {
     this.registerForm = this.formBuilder.group({
       username: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
@@ -20,7 +21,23 @@ export class SingupComponent {
       datebirth: ['', Validators.required]
     });
   }
-  registerUser() {
-    console.log('Datele introduse:', this.registerForm.value);
+  register() {
+    if(this.registerForm.valid)
+    {
+      this.authService.register(this.registerForm.value)
+      .subscribe(
+      (response:any) =>
+      {
+        if(response)
+        {
+          console.log(response);
+        }
+      },
+      (error) =>
+      {
+        console.log(error);
+      }
+      )
+    }
   }
 }

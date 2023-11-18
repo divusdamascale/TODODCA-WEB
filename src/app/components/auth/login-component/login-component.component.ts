@@ -30,6 +30,7 @@ export class LoginComponentComponent {
             if (response && response.token) {
               this.authService.saveJwtToken(response.token);
               this.authService.setIsAuthenticated(true);
+              console.log("a mers");
             }
           },
           (error) => {
