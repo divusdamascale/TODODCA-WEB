@@ -12,6 +12,7 @@ export class NeAuthGuard implements CanActivate {
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
   ): boolean {
+    console.log("neauthguard is called!");
     if (!this.authService.isAuthenticated()) {
       // Utilizatorul nu este autentificat, redirecționează către pagina de login
       this.router.navigate(['/login']);

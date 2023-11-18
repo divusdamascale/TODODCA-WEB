@@ -12,13 +12,17 @@ export class AuthGuard implements CanActivate {
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
   ): boolean {
-    if (this.authService.isLogged()) {
-      // Utilizatorul este autentificat, redirecționează către pagina de home
-      this.router.navigate(['/home']);
+    console.log("authguard is called!");
+    if (!this.authService.isLogged()) {
+      // // Utilizatorul este autentificat, redirecționează către pagina de home
+      
       return true;
+      
+    
     }
     
     // Utilizatorul nu este autentificat, permite accesul
+    this.router.navigate(['/home']);
     return false;
   }
 }
