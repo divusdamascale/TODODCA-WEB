@@ -1,0 +1,11 @@
+
+    <header class="navbar text-center shadow-4 h-5rem  ">
+        <nav class="d-inline-flex mt-md-0 ms-md-auto pt-3 " > 
+            <button pButton pRipple label="Home" routerLink="/home" icon="pi pi-home" class="p-button-text p-button-Info"></button>
+            <button *ngIf="this.isLoggedIn" pButton pRipple label="My List" routerLink="/list" icon="pi pi-align-center " class="p-button-text p-button-secondary"></button>
+       
+            <button *ngIf="!this.isLoggedIn" pButton pRipple label="Sign up" routerLink="/signup" icon="pi pi-user" class="p-button-text p-button-success"></button>
+            <button *ngIf="!this.isLoggedIn" pButton pRipple label="Sign in" routerLink="/login" icon="pi pi-lock" class="p-button-text p-button-help"></button> 
+
+        </nav>
+</header>

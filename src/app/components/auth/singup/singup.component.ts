@@ -26,6 +26,7 @@ export class SingupComponent {
     });
   }
   private lastErrorTimeStamp:number;
+  
   register() {
     const now = new Date().getTime();
     const minTimeBetweenToasts = 3000;
@@ -38,7 +39,7 @@ export class SingupComponent {
       {
         if(response)
         {
-          console.log(response);
+          console.log("succes!");
           this.messageService.add({ severity: 'success', summary: 'SUCCESFULLY!', detail: 'Contul tau a fost creat cu succes!', life: 3000 });
           setTimeout(() => {
             this.router.navigate(['/login']);
@@ -47,9 +48,23 @@ export class SingupComponent {
       },
       (error) =>
       {
-        console.log(error);
+        
+        console.error('Eroare la autentificare:', error)
+           
+        if(!this.lastErrorTimeStamp || now - this.lastErrorTimeStamp > minTimeBetweenToasts)
+          {
+            this.messageService.add({ severity: 'error', summary: 'ERROR!', detail: 'A aparut o eroare la creearea contului!', life: 3000 });
+            this.lastErrorTimeStamp = now;
+          } 
       }
-      )
+      );
+    } else {
+      
+      if(!this.lastErrorTimeStamp || now - this.lastErrorTimeStamp > minTimeBetweenToasts)
+      {
+      this.messageService.add({ severity: 'warn', summary: 'WARNING!', detail: 'Ai lasat campuri necompletate!', life: 3000 });
+      this.lastErrorTimeStamp = now;
+    }
     }
   }
 }

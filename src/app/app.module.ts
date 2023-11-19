@@ -27,6 +27,7 @@ import { RatingModule } from 'primeng/rating';
 import { DropdownModule } from 'primeng/dropdown';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CheckboxModule } from 'primeng/checkbox';
+import { NavBarComponent } from './nav-bar/nav-bar.component';
 
 
 const routes: Routes = [
@@ -45,7 +46,8 @@ const routes: Routes = [
     LoginComponentComponent,
     SingupComponent,
     HomeComponent,
-    ListComponent
+    ListComponent,
+    NavBarComponent
   ],
   imports: [
     BrowserModule,
