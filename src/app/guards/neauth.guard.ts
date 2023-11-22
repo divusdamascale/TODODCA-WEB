@@ -5,24 +5,21 @@ import { AuthService } from '../services/auth.service';
 @Injectable({
   providedIn: 'root',
 })
-export class AuthGuard implements CanActivate {
+export class NeAuthGuard implements CanActivate {
   constructor(private authService: AuthService, private router: Router) {}
 
   canActivate(
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
   ): boolean {
-    console.log("authguard is called!");
-    if (!this.authService.isLogged()) {
-      // // Utilizatorul este autentificat, redirecționează către pagina de home
-      
-      return true;
-      
-    
+    console.log("neauthguard is called!");
+    if (!this.authService.isAuthenticated()) {
+      // Utilizatorul nu este autentificat, redirecționează către pagina de login
+      this.router.navigate(['/login']);
+      return false;
     }
-    
-    // Utilizatorul nu este autentificat, permite accesul
-    this.router.navigate(['/home']);
-    return false;
+
+    // Utilizatorul este autentificat, permite accesul
+    return true;
   }
 }
