@@ -1,31 +1,43 @@
 import { Injectable } from '@angular/core';
+import { AuthService } from './auth.service';
+import { ApiHttpService } from './api-http.service';
+import { Observable, map } from 'rxjs';
+import { List } from '../models/list';
+// import { UserService } from './user.service';
     
 @Injectable()
 export class ListService {
+    /**
+     *
+     */
+    constructor(private jwt:AuthService,private api:ApiHttpService) {
+        
+    }
     getListsData() {
-        return [
-            {
-                id: '1000',
-                code: 'f230fh0g3',
-                name: 'Bamboo Watch',
-                description: 'List Description',
-                inventoryStatus: 'no-status',
-                date:'02-11-2023'
-            },
-          
-        ];
+        // return this.user.getLoggedUser().lists;
     }
 
     getListsMini() {
-        return Promise.resolve(this.getListsData().slice(0, 5));
+        // return Promise.resolve(this.getListsData().slice(0, 5));
     }
 
     getListsSmall() {
-        return Promise.resolve(this.getListsData().slice(0, 10));
+        // return Promise.resolve(this.getListsData().slice(0, 10));
     }
 
-    getLists() {
-        return Promise.resolve(this.getListsData());
+    getLists() :Observable<List[]>{
+
+        return this.api.getLists(this.jwt.userId(), this.jwt.getJwtToken()).pipe(
+            map((response: any) => {
+              return response.map((item: any) => ({
+                listId: item.listId,
+                listName: item.listName,
+                startDate: new Date(item.startDate), 
+                description: item.description
+              }));
+            })
+          );
+
     }
 
 };

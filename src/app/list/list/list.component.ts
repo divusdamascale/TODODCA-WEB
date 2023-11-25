@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ConfirmationService, MessageService } from 'primeng/api';
-import { List } from 'src/app/interfaces/list';
+import { List } from 'src/app/models/list';
 import { ListService } from 'src/app/services/listservice';
 
 @Component({
@@ -26,14 +26,16 @@ export class ListComponent implements OnInit {
     constructor(private listService: ListService, private messageService: MessageService, private confirmationService: ConfirmationService) {}
 
     ngOnInit() {
-        this.listService.getLists().then((data) => (this.lists = data));
-
-        this.statuses = [
-            { label: 'Lejer', value: 'lejer' },
-            { label: 'Moderat', value: 'moderat' },
-            { label: 'Urgent', value: 'urgent' }
-        ];
+        this.listService.getLists().subscribe((data) => {
+            this.lists = data;
+          });
+            
     }
+
+
+      debugLists() {
+        console.log('Debugging lists:', this.lists);
+      }
 
     openNew() {
         this.list = {};
@@ -61,11 +63,11 @@ export class ListComponent implements OnInit {
 
     deleteList(list: List) {
             this.confirmationService.confirm({
-            message: 'Are you sure you want to delete ' + list.name + '?',
+            message: 'Are you sure you want to delete ' + list.listName + '?',
             header: 'Confirm',
             icon: 'pi pi-exclamation-triangle',
             accept: () => {
-                this.lists = this.lists.filter((val) => val.id !== list.id);
+                this.lists = this.lists.filter((val) => val.listId !== list.listId);
                 this.list = {};
                 this.messageService.add({ severity: 'success', summary: 'Successful', detail: 'List Deleted', life: 3000 });
             }
@@ -80,12 +82,12 @@ export class ListComponent implements OnInit {
     saveList() {
         this.submitted = true;
 
-        if (this.list.name?.trim()) {
-            if (this.list.id) {
-                this.lists[this.findIndexById(this.list.id)] = this.list;
+        if (this.list.listName?.trim()) {
+            if (this.list.listId) {
+                this.lists[this.findIndexById(this.list.listId.toString())] = this.list;
                 this.messageService.add({ severity: 'success', summary: 'Successful', detail: 'List Updated', life: 3000 });
             } else {
-                this.list.id = this.createId();
+                // this.list.listId. = this.createId();
                 this.lists.push(this.list);
                 this.messageService.add({ severity: 'success', summary: 'Successful', detail: 'List Created', life: 3000 });
             }
@@ -99,7 +101,7 @@ export class ListComponent implements OnInit {
     findIndexById(id: string): number {
         let index = -1;
         for (let i = 0; i < this.lists.length; i++) {
-            if (this.lists[i].id === id) {
+            if (this.lists[i].listId.toString() === id) {
                 index = i;
                 break;
             }

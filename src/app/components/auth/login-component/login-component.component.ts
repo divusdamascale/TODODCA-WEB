@@ -1,9 +1,11 @@
-import { HttpHeaders } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { ConfirmationService, Message, MessageService } from 'primeng/api';
-import { catchError, of } from 'rxjs';
+import { MessageService } from 'primeng/api';
+import { List } from 'src/app/models/list';
+import { LoggedUser } from 'src/app/models/logged-user';
+import { Profile } from 'src/app/models/profile';
+import { Tag } from 'src/app/models/tag';
 import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
@@ -35,11 +37,9 @@ export class LoginComponentComponent {
         .subscribe(
           
           (response: any) => {
-            if (response && response.token) {
+            if (response && response.token ) {
               this.authService.saveJwtToken(response.token);
               this.authService.setIsAuthenticated(true);
-              
-              console.log("a mers");
               
               this.messageService.add({ severity: 'success', summary: 'SUCCESFULLY!', detail: 'Te-ai autentificat cu succes!', life: 3000 });
               setTimeout(() => {

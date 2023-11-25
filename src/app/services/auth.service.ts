@@ -52,6 +52,13 @@ export class AuthService {
       return null;
     }
   }
+
+  userId():any
+  {
+    var json = this.decodeToken(this.getJwtToken())
+    return json.id;
+  }
+
   isLogged(): boolean{
     const token = this.cookie.get('jwtToken');
       return !!token; //returneaza true daca are token
