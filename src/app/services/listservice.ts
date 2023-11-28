@@ -3,6 +3,7 @@ import { AuthService } from './auth.service';
 import { ApiHttpService } from './api-http.service';
 import { Observable, map } from 'rxjs';
 import { List } from '../models/list';
+import { Listtoadd } from '../models/listtoadd';
 // import { UserService } from './user.service';
     
 @Injectable()
@@ -13,18 +14,7 @@ export class ListService {
     constructor(private jwt:AuthService,private api:ApiHttpService) {
         
     }
-    getListsData() {
-        // return this.user.getLoggedUser().lists;
-    }
-
-    getListsMini() {
-        // return Promise.resolve(this.getListsData().slice(0, 5));
-    }
-
-    getListsSmall() {
-        // return Promise.resolve(this.getListsData().slice(0, 10));
-    }
-
+    
     getLists() :Observable<List[]>{
 
         return this.api.getLists(this.jwt.userId(), this.jwt.getJwtToken()).pipe(
@@ -38,6 +28,14 @@ export class ListService {
             })
           );
 
+    }
+
+    createList(list: Listtoadd) {
+        return this.api.createList(list, this.jwt.getJwtToken());
+    }
+
+    deleteList(listId: number) {
+        return this.api.deleteList(listId, this.jwt.getJwtToken());
     }
 
 };

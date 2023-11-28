@@ -45,6 +45,7 @@ export class LoginComponentComponent {
               setTimeout(() => {
                 this.router.navigate(['/list']);
               }, 2000);
+              window.location.reload();
    
             }
 

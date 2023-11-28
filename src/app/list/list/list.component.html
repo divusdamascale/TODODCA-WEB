@@ -4,8 +4,8 @@
         <p-toast></p-toast>
         <p-toolbar styleClass="mb-4 gap-2">
             <ng-template pTemplate="left">
-                <button pButton pRipple label="New" icon="pi pi-plus" class="p-button-success mr-2" (click)="openNew()"></button>
-                <button pButton pRipple label="Delete" icon="pi pi-trash" class="p-button-danger" (click)="deleteSelectedLists()" [disabled]="!selectedList || !selectedList.length"></button>
+                <button pButton pRipple label="New" icon="pi pi-plus" class="p-button-success mr-2" (click)="showDialog()"></button>
+                <button pButton pRipple label="Delete" icon="pi pi-trash" class="p-button-danger" (click)="confirmDeleteSelected()"></button>
             </ng-template>
     
         </p-toolbar>
@@ -47,6 +47,7 @@
             <ng-template pTemplate="body" *ngFor="let list of lists" >
                 <tr>
                     <td>
+                        <!-- a checkbox to select the specific list of lists -->
                         <p-tableCheckbox [value]="list"></p-tableCheckbox>
                     </td>
                    
@@ -54,11 +55,12 @@
                     <td>
                         <p-tag [value]="list.description"></p-tag>
                     </td>
-                    <td>{{ list.startDate }}</td>
+                    <!-- show td with list.startdate but to show format yyyy/mm/dd -->
+                    <td>{{ formatDate(list.startDate)}}</td>
                     <td>
                         <button pButton pRipple icon="pi pi-eye" class="p-button-rounded p-button-warning mr-2"></button>
-                        <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-success mr-2" (click)="editList(list)"></button>
-                        <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-danger" (click)="deleteList(list)"></button>
+                        <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-success mr-2" ></button>
+                        <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-danger" (click)="confirmDelete(list)" ></button>
                         
                     </td>
                 </tr>
@@ -86,10 +88,10 @@
                 <label for="inventoryStatus">List Status</label>
                 <p-dropdown [(ngModel)]="list.description" inputId="description" [options]="statuses">
                     <ng-template pTemplate="selectedItem">
-                        <p-tag [value]="list.description.toUpperCase()" [severity]="getSeverity(list.description.toUpperCase())"></p-tag>
+                        <p-tag></p-tag>
                     </ng-template>
                     <ng-template let-option pTemplate="item">
-                        <p-tag [value]="option.label" [severity]="getSeverity(option.label)"></p-tag>
+                        <p-tag [value]="option.label"></p-tag>
                     </ng-template>
                 </p-dropdown>
             </div>
@@ -98,7 +100,7 @@
         
         <ng-template pTemplate="footer">
             <button pButton pRipple label="Cancel" icon="pi pi-times" class="p-button-text p-button-danger" (click)="hideDialog()"></button>
-            <button pButton pRipple label="Save" icon="pi pi-check" class="p-button-text p-button-success" (click)="saveList()"></button>
+            <button pButton pRipple label="Save" icon="pi pi-check" class="p-button-text p-button-success"></button>
         </ng-template>
     </p-dialog>
     <p-confirmDialog [style]="{ width: '450px' }"></p-confirmDialog>
