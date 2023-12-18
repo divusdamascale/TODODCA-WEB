@@ -71,7 +71,7 @@ const routes: Routes = [
     RatingModule,
     DropdownModule,
     BrowserAnimationsModule,
-    CheckboxModule
+    CheckboxModule,
    
   ],
   providers: [listserviceTs.ListService],

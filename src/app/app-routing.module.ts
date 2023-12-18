@@ -7,13 +7,13 @@ import { SingupComponent } from './components/auth/singup/singup.component';
 import { ListComponent } from './list/list/list.component';
 import { AuthGuard } from './guards/auth.guard';
 
-const routes: Routes = [
 
+const routes: Routes = [
   { path: 'home', component: HomeComponent},
   { path: 'login', component: LoginComponentComponent, canActivate:[AuthGuard]},
   { path: 'signup', component: SingupComponent, canActivate: [AuthGuard]},
-   {path: 'list', component: ListComponent, canActivate: [NeAuthGuard]}
-
+  { path: 'list', component: ListComponent, canActivate: [NeAuthGuard]},
+  
 ];
 
 @NgModule({

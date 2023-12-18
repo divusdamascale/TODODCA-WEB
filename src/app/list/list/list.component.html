@@ -5,7 +5,7 @@
         <p-toolbar styleClass="mb-4 gap-2">
             <ng-template pTemplate="left">
                 <button pButton pRipple label="New" icon="pi pi-plus" class="p-button-success mr-2" (click)="showDialog()"></button>
-                <button pButton pRipple label="Delete" icon="pi pi-trash" class="p-button-danger" (click)="confirmDeleteSelected()"></button>
+                <button pButton pRipple label="Delete" icon="pi pi-trash" class="p-button-danger" (click)="confirmDeleteSelected()" [disabled]="!selectedList"></button>
             </ng-template>
     
         </p-toolbar>
@@ -16,7 +16,7 @@
   [value]="lists"
   [rows]="10"
   [paginator]="true"
-  [globalFilterFields]="['name', 'country.name', 'representative.name', 'status']"
+  [globalFilterFields]="['name', 'description', 'date']"
   [tableStyle]="{ 'min-width': '75rem' }"
   [(selection)]="selectedList"
   [rowHover]="true"
@@ -24,12 +24,14 @@
   currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
   [showCurrentPageReport]="true"
 >
+        
             <ng-template pTemplate="caption">
                 <div class="flex align-items-center justify-content-between">
                     <h5 class="m-0">Manage Lists</h5>
                     <span class="p-input-icon-left">
                         <i class="pi pi-search"></i>
-                        <input pInputText type="text" (input)="dt.filterGlobal($event.target, 'contains')" placeholder="Search..." />          </span>
+                        <input pInputText type="text" #searchInput (input)="filterGlobal($event, searchInput.value)" placeholder="Search..." />
+                       </span>
                 </div>
             </ng-template>
             <ng-template pTemplate="header">
@@ -38,19 +40,20 @@
                         <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
                     </th>
                     <th pSortableColumn="name" style="min-width:15rem">Name <i class="pi pi-sort-alt"></i></th>
-                    <th pSortableColumn="inventoryStatus" style="min-width:10rem">Status <i class="pi pi-tag"></i></th>
+                    <th pSortableColumn="description" style="min-width:10rem">Description<i class="pi pi-tag"></i></th>
                     <th pSortableColumn="date" style="min-width:10rem">Date <i class="pi pi-clock"></i></th>
                     <th>User Option<i class="pi pi-cog"></i></th>
                 </tr>
             </ng-template>
-           
-            <ng-template pTemplate="body" *ngFor="let list of lists" >
+
+
+            <ng-template  ngFor let-list [ngForOf]="lists" pTemplate="body">
+                
                 <tr>
                     <td>
                         <!-- a checkbox to select the specific list of lists -->
                         <p-tableCheckbox [value]="list"></p-tableCheckbox>
                     </td>
-                   
                     <td>{{ list.listName }}</td>
                     <td>
                         <p-tag [value]="list.description"></p-tag>
@@ -59,49 +62,59 @@
                     <td>{{ formatDate(list.startDate)}}</td>
                     <td>
                         <button pButton pRipple icon="pi pi-eye" class="p-button-rounded p-button-warning mr-2"></button>
-                        <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-success mr-2" ></button>
-                        <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-danger" (click)="confirmDelete(list)" ></button>
-                        
+                        <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-success mr-2" (click)="showEditDialog(list)"></button>
+                        <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-danger" (click)="confirmDelete(list)"></button>
                     </td>
                 </tr>
+                
             </ng-template>
             <ng-template pTemplate="summary">
                 <div class="flex align-items-center justify-content-between">In total there are {{ lists ? lists.length : 0 }} lists.</div>
             </ng-template>
         </p-table>
     </div>
+ 
     <p-dialog [(visible)]="listDialog" [style]="{ width: '450px' }" header="list Details" [modal]="true" styleClass="p-fluid">
-        <ng-template  pTemplate="content">
+        <ng-template pTemplate="content">
             
             <div class="field">
                 <label for="name">Name</label>
-                <input type="text" pInputText id="name" required autofocus />
-                <small class="p-error" *ngIf="submitted && !list.listName">Name is required.</small>
+                <input type="text" pInputText id="listName" maxlength="30"  placeholder="My first list" [(ngModel)]="newList.ListName" required autofocus />
+                <small class="p-error" *ngIf="submitted && !newList.ListName">List name is required.</small>
             </div>
             
             <div class="field">
                 <label for="description">Description</label>
-                <textarea id="description" style="resize: none; width: 400px; height: 150px;" pInputTextarea required rows="3" cols="20"></textarea>
-            </div>
-    
-            <div class="field">
-                <label for="inventoryStatus">List Status</label>
-                <p-dropdown [(ngModel)]="list.description" inputId="description" [options]="statuses">
-                    <ng-template pTemplate="selectedItem">
-                        <p-tag></p-tag>
-                    </ng-template>
-                    <ng-template let-option pTemplate="item">
-                        <p-tag [value]="option.label"></p-tag>
-                    </ng-template>
-                </p-dropdown>
-            </div>
+                <textarea id="description" [(ngModel)]="newList.Description" style="resize: none; width: 400px; height: 150px;" pInputTextarea required rows="3" cols="20" maxlength="50" placeholder="This is my first list!"></textarea>
             
+            </div>
         </ng-template>
         
         <ng-template pTemplate="footer">
             <button pButton pRipple label="Cancel" icon="pi pi-times" class="p-button-text p-button-danger" (click)="hideDialog()"></button>
-            <button pButton pRipple label="Save" icon="pi pi-check" class="p-button-text p-button-success"></button>
+            <button pButton pRipple label="Save" icon="pi pi-check" class="p-button-text p-button-success" (click)="addList()"></button>
         </ng-template>
     </p-dialog>
+       <!-- Dialog separat pentru editare listă -->
+<p-dialog [(visible)]="editDialog" [style]="{ width: '450px' }" header="Edit List" [modal]="true" styleClass="p-fluid">
+    <ng-template pTemplate="content">
+        <div class="field">
+            <label for="name">Name</label>
+            <input type="text" pInputText maxlength="30" id="listName" [(ngModel)]="newList.ListName" required autofocus />
+            <small class="p-error" *ngIf="submitted && !newList.ListName">List name is required.</small>
+        </div>
+
+        <div class="field">
+            <label for="description">Description</label>
+            <textarea id="description" maxlength="50" [(ngModel)]="newList.Description" style="resize: none; width: 400px; height: 150px;" pInputTextarea required rows="3" cols="20"></textarea>
+        </div>
+    </ng-template>
+    <ng-template pTemplate="footer">
+        <!-- Buton de salvare -->
+        <button pButton pRipple label="Save" icon="pi pi-check" class="p-button-text p-button-success" ></button>
+        <button pButton pRipple label="Cancel" icon="pi pi-times" class="p-button-text p-button-danger" (click)="hideDialog()"></button>
+        <!-- ... alte butoane ... -->
+    </ng-template>
+</p-dialog>
     <p-confirmDialog [style]="{ width: '450px' }"></p-confirmDialog>
-</div>
+

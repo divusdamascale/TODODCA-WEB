@@ -15,19 +15,18 @@ export class ListService {
         
     }
     
-    getLists() :Observable<List[]>{
-
-        return this.api.getLists(this.jwt.userId(), this.jwt.getJwtToken()).pipe(
-            map((response: any) => {
-              return response.map((item: any) => ({
-                listId: item.listId,
-                listName: item.listName,
-                startDate: new Date(item.startDate), 
-                description: item.description
-              }));
-            })
-          );
-
+    async getLists(): Promise<List[]> {
+      try {
+        const response: any = await this.api.getLists(this.jwt.userId(), this.jwt.getJwtToken()).toPromise();
+        return response.map((item: any) => ({
+          listId: item.listId,
+          listName: item.listName,
+          startDate: new Date(item.startDate),
+          description: item.description
+        }));
+      } catch (error) {
+        throw error;
+      }
     }
 
     createList(list: Listtoadd) {

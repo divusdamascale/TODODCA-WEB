@@ -1,6 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Listtoadd } from '../models/listtoadd';
+import { Observable } from 'rxjs';
+import { List } from '../models/list';
+import { map } from 'rxjs/operators';
 
 
 @Injectable({
@@ -12,29 +15,32 @@ export class ApiHttpService {
   constructor(private http :HttpClient) { }
 
   //get all lists
-  getLists(userId: number,jwtToken:string) {
-
+  getLists(userId: number, jwtToken: string): Observable<List[]> {
     const headers = new HttpHeaders({
       'Authorization': `Bearer ${jwtToken}`
     });
 
-    return this.http.get(`${this.baseUrl}/list/getByUserId/${userId}`,{headers});
+    return this.http.get(`${this.baseUrl}/list/getByUserId/${userId}`, { headers }).pipe(
+      map(response => response as List[])
+    );
   }
 
-  // create a new list
-  createList(list: Listtoadd,jwtToken:string) {
+  async createList(list: Listtoadd, jwtToken: string): Promise<List> {
     const headers = new HttpHeaders({
       'Authorization': `Bearer ${jwtToken}`
     });
-    return this.http.post(`${this.baseUrl}/list/create`, list,{headers});
+
+    const response = await this.http.post<List>(`${this.baseUrl}/list/createlist`, list, { headers }).toPromise();
+    return response;
   }
+  
   
   //delete a list
   deleteList(listId: number,jwtToken:string) {
     const headers = new HttpHeaders({
       'Authorization': `Bearer ${jwtToken}`
     });
-    return this.http.delete(`${this.baseUrl}/list/delete/${listId}`,{headers});
+    return this.http.delete(`${this.baseUrl}/list/deleteList/${listId}`,{headers});
   }
 
 }
