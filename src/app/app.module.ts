@@ -28,6 +28,8 @@ import { DropdownModule } from 'primeng/dropdown';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CheckboxModule } from 'primeng/checkbox';
 import { NavBarComponent } from './nav-bar/nav-bar.component';
+import { TextInputComponent } from './components/text-input/text-input.component';
+
 
 
 const routes: Routes = [
@@ -47,7 +49,8 @@ const routes: Routes = [
     SingupComponent,
     HomeComponent,
     ListComponent,
-    NavBarComponent
+    NavBarComponent,
+    TextInputComponent
   ],
   imports: [
     BrowserModule,
@@ -72,6 +75,7 @@ const routes: Routes = [
     DropdownModule,
     BrowserAnimationsModule,
     CheckboxModule,
+    FormsModule
    
   ],
   providers: [listserviceTs.ListService],

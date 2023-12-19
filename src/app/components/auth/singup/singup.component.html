@@ -13,29 +13,24 @@
 
               <div>
               
-                      <label class="block text-900 text-xl font-medium mb-2">Username</label>
-                      <input pInputText id="username" type="text"  class="w-full md:w-25rem mb-3"  formControlName="username" />
-                   
-                      <label class="block text-900 text-xl font-medium mb-2">Email</label>
-                      <input pInputText id="email" type="email"  class="w-full md:w-25rem mb-3" formControlName="email" />
-                     
-                      <label  class="block text-900 font-medium text-xl mb-2">Password</label>
-                      <input pInputText id="password" type="password" class="w-full md:w-25rem mb-3"  formControlName="password"/>
+                  
+                      <app-text-input [formControl]="registerForm.controls['username']" [label]="'Username'"> </app-text-input>
+            
+                      <app-text-input [formControl]="registerForm.controls['email']" [label]="'Email Address'"> </app-text-input>
+
+                      <app-text-input [formControl]="registerForm.controls['password']" [label]="'Password'" [type]="'password'"> </app-text-input>
                       
-                      <label class="block text-900 text-xl font-medium mb-2">Last Name</label>
-                      <input pInputText id="lname" type="text"  class="w-full md:w-25rem mb-3"  formControlName="lastname" />
+                      <app-text-input [formControl]="registerForm.controls['lastname']" [label]="'Lastname'"> </app-text-input>
 
-                      <label class="block text-900 text-xl font-medium mb-2">First Name</label>
-                      <input pInputText id="fname" type="text"  class="w-full md:w-25rem mb-3"  formControlName="firstname" />
+                      <app-text-input [formControl]="registerForm.controls['firstname']" [label]="'Firstname'"> </app-text-input>
 
-                      <label class="block text-900 text-xl font-medium mb-2">Date Birth</label>
-                      <input pInputText id="datebirth" type="date"  class="w-full md:w-25rem mb-3"  formControlName="datebirth" />
+                      <app-text-input [formControl]="registerForm.controls['datebirth']" [label]="'Date of birth'" [type]="'date'"> </app-text-input>
                       
                   <div class="flex align-items-center justify-content-between mb-5 gap-5">
                       
                      
                   </div>
-                  <button pButton pRipple label="Sign Up" class="w-full p-3 text-xl p-button-outlined p-button-help" type="submit"></button>
+                  <button pButton pRipple label="Sign Up" class="w-full p-3 text-xl p-button-outlined p-button-help" [disabled]="registerForm.invalid" type="submit"></button>
               </div>
           </form>
           </div>

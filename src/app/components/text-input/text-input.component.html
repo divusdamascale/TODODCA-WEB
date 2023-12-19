@@ -1,0 +1,16 @@
+<div class="field">
+    <span class="p-float-label">
+        <input 
+            pInputText
+            type="{{type}}"
+            [formControl]="control"
+            class="w-full md:w-30rem mb-2"
+            style="padding:1rem"
+            [ngClass]="(control?.touched) ? control?.invalid ? 'is-invalid' : 'is-valid' : null"
+        >
+        <label for="{{type}}" class="">{{label}}</label>
+    </span>
+    <div *ngIf="control?.errors?.['required']" class="invalid-feedback ml-3" style="color: red; font-size: small;">Please enter your {{label}}.</div>
+     <div *ngIf="control?.errors?.['email']" class="invalid-feedback ml-3"  style="color: red; font-size: small;">Invalid email address.</div>
+
+</div>

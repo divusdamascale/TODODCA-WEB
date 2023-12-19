@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { MessageService } from 'primeng/api';
 import { List } from 'src/app/models/list';
@@ -15,15 +15,12 @@ import { AuthService } from 'src/app/services/auth.service';
   providers: [MessageService]
 })
 export class LoginComponentComponent {
-  loginForm: FormGroup;
-
+    loginForm = new  FormGroup({
+    username: new FormControl('', Validators.required),
+    password: new FormControl('', Validators.required)
+  });
   constructor(private formBuilder: FormBuilder,private authService:AuthService, private router:Router, private messageService:MessageService) {
-    this.loginForm = this.formBuilder.group({
-      username: ['', Validators.required],
-      password: ['', Validators.required],
-      
-  
-    });
+
   }
   private lastErrorTimestamp: number;
 

@@ -2,8 +2,9 @@ import { Component } from '@angular/core';
 
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { Message, MessageService } from 'primeng/api';
+import { MessageService } from 'primeng/api';
 import { AuthService } from 'src/app/services/auth.service';
+import { FormsModule } from '@angular/forms'; // Add this line
 
 @Component({
   selector: 'app-singup',
@@ -12,19 +13,23 @@ import { AuthService } from 'src/app/services/auth.service';
   providers: [MessageService]
 })
 export class SingupComponent {
-  registerForm: FormGroup;
+  
+   
 
   constructor(private formBuilder: FormBuilder,private authService:AuthService, private messageService:MessageService, private router:Router) {
-    this.registerForm = this.formBuilder.group({
-      username: ['', Validators.required],
-      email: ['', [Validators.required, Validators.email]],
-      password: ['', Validators.required],
-      lastname: ['', Validators.required],
-      firstname: ['', Validators.required],
-      datebirth: ['', Validators.required]
-      
-    });
+ 
   }
+  registerForm =  this.formBuilder.group({
+  username: new FormControl('', Validators.required),
+  email: new FormControl('',[Validators.required, Validators.email]),
+  password: new FormControl('', Validators.required),
+  lastname: new FormControl('', Validators.required),
+  firstname: new FormControl('', Validators.required),
+  datebirth: new FormControl('', Validators.required),
+})
+  
+  
+
   private lastErrorTimeStamp:number;
   
   register() {
