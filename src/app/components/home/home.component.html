@@ -4,23 +4,25 @@
     <div class="content pt-3 text-center ">
       <h2>Welcome to Our Website</h2>
       <p>Explore our services and features below:</p>
-      <div class="cards flex justify-content-center align-items-center flex-row pt-3 ">
-        <p-card  [style]="{width: '300px'}">
+      <div class="cards flex justify-content-center align-items-center flex-row pt-2">
+        <p-card  [style]="{width: '300px'}" class="shadow-3">
           <i class="pi pi-user-edit  "></i>
-          <p>Card 1 description goes here.</p>
+          <h3>Create an account </h3>
+          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quam accusamus beatae quia similique. Ut, aut. Temporibus tempora architecto nam id soluta molestias aspernatur fugiat earum doloribus maiores, rerum explicabo error..</p>
         </p-card>
-        <p-card  [style]="{width: '300px'}">
+        <p-card  [style]="{width: '300px'}" class="shadow-5 ">
           <i class="pi pi-home  "></i>
-          <p>Card 2 description goes here.</p>
+          <h3>Organize your lists and tasks </h3>
+          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Velit nostrum atque, quo quod, dignissimos doloribus odio iste minus eaque eum excepturi harum assumenda quas reiciendis ducimus. Autem, corporis. Corrupti, iusto..</p>
         </p-card>
-        <p-card [style]="{width: '300px'}">
+        <p-card [style]="{width: '300px'}" class="shadow-2">
           <i class="pi pi-bell  "></i>
-          <p>Card 3 description goes here.</p>
+          <h3>Solve your daily activities</h3>
+          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloribus quo suscipit, nam molestiae placeat corrupti praesentium maxime, error eum perferendis magni, saepe hic est. Laudantium quia similique consectetur voluptatem error..</p>
         </p-card>
       </div>
       <br>
-      <p-button label="Get Started" [rounded]="true" severity="success"> </p-button>
-
+      <p-button label="Get Started" [rounded]="true" severity="success" routerLink="/signup"></p-button>
       <div class="timeline mt-4">
         <div class="card">
           <p-timeline [value]="events" align="alternate" styleClass="customized-timeline">
@@ -36,7 +38,9 @@
                           Lorem ipsum dolor sit amet, consectetur adipisicing elit. Inventore sed consequuntur error repudiandae numquam deserunt quisquam repellat libero asperiores earum nam nobis, culpa ratione quam perferendis esse, cupiditate
                           neque quas!
                       </p>
-                      <button pButton label="Read more" class="p-button-text"></button>
+                      <br>
+                      <p-button label="view more  " [text]="true" severity="secondary"></p-button>
+                      
                   </p-card>
               </ng-template>
           </p-timeline>

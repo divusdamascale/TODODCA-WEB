@@ -19,14 +19,14 @@ interface EventItem{
 export class HomeComponent {
   events: EventItem[];
   constructor() {
+    const currentDate = new Date();
+    const formattedDate = `${currentDate.getDate()}/${currentDate.getMonth() + 1}/${currentDate.getFullYear()} ${currentDate.getHours()}:${currentDate.getMinutes()}`;
 
     this.events = [
-      { title: 'Ordered', date: '15/10/2020 10:30', icon: 'pi pi-shopping-cart', color: '#9C27B0', image: 'game-controller.jpg' },
-      { title: 'Processing', date: '15/10/2020 14:00', icon: 'pi pi-cog', color: '#673AB7' },
-      { title: 'Shipped', date: '15/10/2020 16:15', icon: 'pi pi-shopping-cart', color: '#FF9800' },
-      { title: 'Delivered', date: '16/10/2020 10:00', icon: 'pi pi-check', color: '#607D8B' }
-   ];
-
-
+      { title: 'Sign up', date: formattedDate, icon: 'pi pi pi-user-plus', color: '#9C27B0'},
+      { title: 'Login', date: formattedDate, icon: 'pi pi-lock-open', color: '#673AB7' },
+      { title: 'Add your list and tasks', date: formattedDate, icon: 'pi pi-user-edit', color: '#FF9800' },
+      { title: 'Enjoy', date: formattedDate, icon: 'pi pi-check', color: '#607D8B' }
+    ];
   }
 }

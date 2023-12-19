@@ -29,6 +29,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CheckboxModule } from 'primeng/checkbox';
 import { NavBarComponent } from './nav-bar/nav-bar.component';
 import { TextInputComponent } from './components/text-input/text-input.component';
+import { CalendarModule } from 'primeng/calendar';
+import { SpeedDialModule } from 'primeng/speeddial';
+import {MenuModule} from 'primeng/menu';
 
 
 
@@ -75,7 +78,10 @@ const routes: Routes = [
     DropdownModule,
     BrowserAnimationsModule,
     CheckboxModule,
-    FormsModule
+    FormsModule,
+    CalendarModule,
+    SpeedDialModule,
+    MenuModule,
    
   ],
   providers: [listserviceTs.ListService],

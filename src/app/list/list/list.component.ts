@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ConfirmationService, MessageService } from 'primeng/api';
+import { ConfirmationService, MenuItem, MessageService } from 'primeng/api';
 import { List } from 'src/app/models/list';
 import { Listtoadd } from 'src/app/models/listtoadd';
 import { AuthService } from 'src/app/services/auth.service';
@@ -15,6 +15,8 @@ import { from } from 'rxjs';
 })
 export class ListComponent implements OnInit {
 
+  userName: string;
+  items: MenuItem[];
   listDialog: boolean = false;
   editDialog: boolean = false;
   lists!: List[];
@@ -38,13 +40,54 @@ export class ListComponent implements OnInit {
   ) {
 
   }
-
+ 
   async ngOnInit() {
-   
+
     await this.loadLists()
     console.log(this.lists)
-  }
 
+    this.userName = this.authService.getUserName();
+    console.log(this.userName )
+
+    this.items = [{
+      label: this.userName + ' profile',
+      items: [{
+          label: 'Change Password',
+          icon: 'pi pi-refresh',
+          command: () => {
+           
+          }
+      },
+      {
+          label: 'Delete Account',
+          icon: 'pi pi-times',
+          command: () => {
+              
+          }
+      }
+      ]},
+      {
+          label: '  ',
+          items: [
+          {
+              label: 'Log out',
+              icon: 'pi pi-upload',
+              command: () => {
+              this.signout();
+              }
+              
+            
+          }
+      ]}
+  ];
+  
+  
+    
+  }
+  signout() {
+    this.authService.deleteJwtToken();
+    window.location.reload();
+  }
   
 
   async loadLists() {

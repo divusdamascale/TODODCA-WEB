@@ -81,5 +81,13 @@ export class AuthService {
   // {
   //   return this.http.get<boolean>(this.baseUrl + '/emailExists?email=' + email);
   // }
+  getUserName(): string | undefined {
+    const token = this.getJwtToken();
+    if (token) {
+      const decodedToken = this.decodeToken(token);
+      return decodedToken.username;
+    }
+    return undefined;
+  }
 
 }

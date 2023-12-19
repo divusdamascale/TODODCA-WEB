@@ -63,14 +63,7 @@ export class SingupComponent {
           } 
       }
       );
-    } else {
-      
-      if(!this.lastErrorTimeStamp || now - this.lastErrorTimeStamp > minTimeBetweenToasts)
-      {
-      this.messageService.add({ severity: 'warn', summary: 'WARNING!', detail: 'Ai lasat campuri necompletate!', life: 3000 });
-      this.lastErrorTimeStamp = now;
-    }
-    }
+    } 
   }
   //  validateEmailNotTaken(): AsyncValidatorFn {
 
