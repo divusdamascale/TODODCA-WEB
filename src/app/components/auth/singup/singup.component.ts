@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
 
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, AsyncValidatorFn, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { MessageService } from 'primeng/api';
 import { AuthService } from 'src/app/services/auth.service';
 import { FormsModule } from '@angular/forms'; // Add this line
+import { debounceTime, finalize, map, switchMap, take } from 'rxjs';
 
 @Component({
   selector: 'app-singup',
@@ -20,14 +21,13 @@ export class SingupComponent {
  
   }
   registerForm =  this.formBuilder.group({
-  username: new FormControl('', Validators.required),
-  email: new FormControl('',[Validators.required, Validators.email]),
-  password: new FormControl('', Validators.required),
-  lastname: new FormControl('', Validators.required),
-  firstname: new FormControl('', Validators.required),
-  datebirth: new FormControl('', Validators.required),
+  username: ['', Validators.required],
+   email: ['',[Validators.required, Validators.email]],
+  password: ['', [Validators.required, Validators.minLength(6)]],
+  lastname: ['', Validators.required],
+  firstname: ['', Validators.required],
+  datebirth: ['', Validators.required],
 })
-  
   
 
   private lastErrorTimeStamp:number;
@@ -72,4 +72,21 @@ export class SingupComponent {
     }
     }
   }
+  //  validateEmailNotTaken(): AsyncValidatorFn {
+
+  //       return (control: AbstractControl) => {
+  //         return control.valueChanges.pipe(
+  //           debounceTime(300),
+  //           take(1),
+  //           switchMap(() =>  {
+  //             return this.authService.checkEmailExists(control.value).pipe(
+  //               map(result => result ? {emailExists: true} : null),
+  //               finalize(() => control.markAsTouched())
+  //             )
+  //             console.log(this.validateEmailNotTaken);
+  //           })
+  //         )
+         
+  //       }
+  //     }
 }

@@ -9,8 +9,13 @@
             [ngClass]="(control?.touched) ? control?.invalid ? 'is-invalid' : 'is-valid' : null"
         >
         <label for="{{type}}" class="">{{label}}</label>
+        <!-- <div *ngIf="control.status === 'PENDING'" class="fa fa-spinner fa-spin loader"></div> -->
     </span>
     <div *ngIf="control?.errors?.['required']" class="invalid-feedback ml-3" style="color: red; font-size: small;">Please enter your {{label}}.</div>
-     <div *ngIf="control?.errors?.['email']" class="invalid-feedback ml-3"  style="color: red; font-size: small;">Invalid email address.</div>
+    <div *ngIf="control?.errors?.['email']" class="invalid-feedback ml-3"  style="color: red; font-size: small;">Invalid email address.</div>
+    <div *ngIf="control?.errors?.['minlength']" class="invalid-feedback ml-3"  style="color: red; font-size: small;">Minimum length is {{control?.errors?.['minlength'].requiredLength}} characters.</div>
+
+     
+     <!-- <div *ngIf="control.errors?.['emailExists']" class="invalid-feedback ml-3" style="color: red; font-size: small;">Email address is taken.</div> -->
 
 </div>

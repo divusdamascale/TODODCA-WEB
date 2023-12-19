@@ -77,4 +77,9 @@ export class AuthService {
   deleteJwtToken() {
     this.cookie.delete('jwtToken');
   }
+  // checkEmailExists(email:string)
+  // {
+  //   return this.http.get<boolean>(this.baseUrl + '/emailExists?email=' + email);
+  // }
+
 }
