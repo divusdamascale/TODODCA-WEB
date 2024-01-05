@@ -26,7 +26,7 @@ export class SingupComponent {
   password: ['', [Validators.required, Validators.minLength(6)]],
   lastname: ['', Validators.required],
   firstname: ['', Validators.required],
-  datebirth: ['', Validators.required],
+  birthDate: ['', Validators.required],
 })
   
 
@@ -35,6 +35,12 @@ export class SingupComponent {
   register() {
     const now = new Date().getTime();
     const minTimeBetweenToasts = 3000;
+
+    //datebirth vreau sa fie formatat yyyy-mm-dd
+    var datebirth = new Date(this.registerForm.value.birthDate);
+    this.registerForm.value.birthDate = datebirth.getFullYear() + "-" + (datebirth.getMonth() + 1) + "-" + datebirth.getDate();
+    console.log(this.registerForm.value.birthDate);
+    console.log(this.registerForm.value);
 
     if(this.registerForm.valid)
     {
