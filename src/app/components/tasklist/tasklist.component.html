@@ -77,15 +77,15 @@
       </div>
 
       <div class="field">
-        <p-dropdown [options]="tagList" [(ngModel)]="selectedTag" placeholder="Select a tag">
+        <p-dropdown  [options]="tagList" [(ngModel)]="selectedTag"  placeholder="Select a tag" optionLabel="TagName" displayProperty="TagName" append="body"> 
           <ng-template let-option pTemplate="item">
             {{ option.TagName }}
-            
           </ng-template>
         </p-dropdown>
-        
       </div>
 
+      
+    
       <div class="field">
         <span class="p-float-label">
           <p-calendar [(ngModel)]="newTask.EndDate" inputId="taskend" [minDate]="this.currentDate"></p-calendar>

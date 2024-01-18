@@ -35,7 +35,7 @@ export class TasklistComponent implements OnInit {
     TagName: '',
   };
   tagList: Tag[] = [];
-  selectedTag: Tag | null = null;
+  selectedTag: string | null = null;
 
 
   constructor(
@@ -47,7 +47,8 @@ export class TasklistComponent implements OnInit {
   ) {}
 
   selectTag(tag: Tag) {
-    this.selectedTag = tag;
+    this.selectedTag = tag.tagName;
+    console.log(this.selectedTag);
   }
 
   ngOnInit() {
