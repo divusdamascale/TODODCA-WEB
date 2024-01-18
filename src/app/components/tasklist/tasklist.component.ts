@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { TaskService } from 'src/app/services/taskservice';
 import { Task } from 'src/app/models/task';
 import { ActivatedRoute } from '@angular/router';
-import { ConfirmationService, Header, MessageService } from 'primeng/api';
+import { ConfirmationService, Header, MenuItem, MessageService } from 'primeng/api';
 import { from, map } from 'rxjs';
 import { TaskToAdd } from 'src/app/models/tasktoadd';
 import { state } from '@angular/animations';
@@ -61,6 +61,11 @@ export class TasklistComponent implements OnInit {
       });
     });
     this.loadTags(this.authService.userId());
+
+    
+
+
+
   }
 
   async loadTasks() {
