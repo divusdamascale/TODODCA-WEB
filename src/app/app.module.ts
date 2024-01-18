@@ -32,8 +32,12 @@ import { TextInputComponent } from './components/text-input/text-input.component
 import { CalendarModule } from 'primeng/calendar';
 import { SpeedDialModule } from 'primeng/speeddial';
 import {MenuModule} from 'primeng/menu';
-
-
+import { TasklistComponent } from './components/tasklist/tasklist.component';
+import { CustomerService } from './services/customerservice';
+import { TaskService } from './services/taskservice';
+import { ConfirmationService, MessageService } from 'primeng/api';
+import { BlockUI, BlockUIModule } from 'primeng/blockui';
+import { ChipModule } from 'primeng/chip';
 
 const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
@@ -41,6 +45,7 @@ const routes: Routes = [
   { path: 'login', component: LoginComponentComponent },
   { path: 'signup', component: SingupComponent },
   { path: 'list', component: ListComponent },
+  { path: 'tasklist', component: TasklistComponent},
 
   // Alte rute pot fi adăugate aici
 ];
@@ -53,7 +58,9 @@ const routes: Routes = [
     HomeComponent,
     ListComponent,
     NavBarComponent,
-    TextInputComponent
+    TextInputComponent,
+    TasklistComponent,
+    
   ],
   imports: [
     BrowserModule,
@@ -82,9 +89,12 @@ const routes: Routes = [
     CalendarModule,
     SpeedDialModule,
     MenuModule,
+    BlockUIModule,
+    ChipModule,
+
    
   ],
-  providers: [listserviceTs.ListService],
+  providers: [listserviceTs.ListService, TaskService, ConfirmationService, MessageService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
