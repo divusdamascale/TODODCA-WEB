@@ -6,6 +6,7 @@ import { MessageService } from 'primeng/api';
 import { AuthService } from 'src/app/services/auth.service';
 import { FormsModule } from '@angular/forms'; // Add this line
 import { debounceTime, finalize, map, switchMap, take } from 'rxjs';
+import { format } from 'date-fns';
 
 @Component({
   selector: 'app-singup',
@@ -28,18 +29,13 @@ export class SingupComponent {
   firstname: ['', Validators.required],
   birthDate: ['', Validators.required],
 })
-  
-
   private lastErrorTimeStamp:number;
   
   register() {
     const now = new Date().getTime();
     const minTimeBetweenToasts = 3000;
-
-    //datebirth vreau sa fie formatat yyyy-mm-dd
     var datebirth = new Date(this.registerForm.value.birthDate);
-    this.registerForm.value.birthDate = datebirth.getFullYear() + "-" + (datebirth.getMonth() + 1) + "-" + datebirth.getDate();
-    console.log(this.registerForm.value.birthDate);
+    this.registerForm.value.birthDate = format(datebirth, 'yyyy-MM-dd');
     console.log(this.registerForm.value);
 
     if(this.registerForm.valid)
@@ -71,6 +67,7 @@ export class SingupComponent {
       );
     } 
   }
+
   //  validateEmailNotTaken(): AsyncValidatorFn {
 
   //       return (control: AbstractControl) => {

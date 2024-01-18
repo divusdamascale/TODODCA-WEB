@@ -1,0 +1,155 @@
+<div class="card">
+  <p-toast></p-toast> 
+  <p-toolbar styleClass="mb-4 gap-2">
+    <ng-template pTemplate="left">
+      <button pButton pRipple label="New task" icon="pi pi-plus mr-2" (click)="showCreateTaskDialog()" class="p-button-success mr-2"></button>
+      <button pButton pRipple label="New Tag" icon="pi pi-tag mr-2" (click)="showCreateTagDialog()" class="p-button-help mr-2"></button>
+      
+    </ng-template>
+    <ng-template pTemplate="right">
+      <p-button [text]="true" icon="pi pi-user" severity="help" [rounded]="true"></p-button>
+      <p-menu #menu [popup]="true" ></p-menu>
+    </ng-template>
+    
+  </p-toolbar>
+  <div class="table-responsive">
+    <p-table [value]="tasks" sortField="taskName" sortMode="single" dataKey="taskId" [tableStyle]="{'min-width': '70rem'}">
+      <ng-template pTemplate="header">
+        <tr>
+          <th style="width:20%"><i class="pi pi-folder" style="font-size: 15px"></i> Task</th>
+          <th style="width:20%"><i class="pi pi-tag" style="font-size: 15px"></i> Tag</th>
+          <th style="width:20%"><i class="pi pi-calendar" style="font-size: 15px"></i> End Date</th>
+          <th style="width:20%"><i class="pi pi-info-circle " style="font-size: 15px"></i> Status</th>
+          <th style="width:20%;"><i class="pi pi-cog" style="font-size: 15px"></i> Action</th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-task>
+        
+        <tr #test>
+          <td>{{task.taskName}}</td>
+
+          <td><p-chip class="mr-2" label="Tag exemple"  icon="pi pi-bookmark-fill"></p-chip>
+           
+          </td>
+          <td>{{task.endDate | date: 'yyyy-MM-dd'}}</td>
+          <td>
+            <span class="p-badge p-badge-warning" *ngIf="task.state ==  0"><i class="pi pi-spin pi-spinner" style="font-size: 10px"></i> In Progress</span>
+            <span class="p-badge p-badge-success " *ngIf="task.state ==  1"><i class="pi pi-spin pi-spinner" style="font-size: 10px"></i> Completed</span>
+            <span class="p-badge p-badge-danger ml-2" *ngIf="task.endDate && task.endDate < currentDate && !isSameDay(task.endDate, currentDate)">
+              <i class="pi pi-calendar" style="font-size: 10px"></i> Expired
+            </span>
+
+           
+          </td>
+          <td>
+            <button pButton pRipple icon="pi pi-check " *ngIf="task.state ==  0"     class="p-button-rounded p-button-success mr-2" (click)="changeState(task)" ></button>
+            <button pButton pRipple icon="pi pi-sync " *ngIf="task.state ==  1"  class="p-button-rounded p-button-secondary mr-2" (click)="reopenTask(task)" ></button>
+            <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-help mr-2" (click)="showEditTaskDialog()"></button>
+            <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-danger" (click)="deleteTask(task)"></button>
+                   
+          </td>
+        </tr>
+        
+     
+      
+      </ng-template>
+    </p-table>
+  </div>
+
+  <p-dialog [(visible)]="addTaskDialog" [style]="{ width: '600px', height:'750px'}" header="Task Details" [modal]="true" styleClass="p-fluid">
+    <ng-template pTemplate="content">
+      
+      <div class="field">
+        <span class="p-float-label mt-5">
+          <input pInputText id="taskname" [(ngModel)]="newTask.TaskName" required autofocus />
+          <small class="p-error" *ngIf="submitted && !newTask.TaskName">Task name is required.</small>
+          <label for="taskname">Taskname</label>
+      </span>
+      
+      </div>
+      <div class="field">
+        <p-dropdown [options]="colorOptions" [(ngModel)]="selectedColor" placeholder="Select tag color" 
+        [virtualScroll]="true" [virtualScrollItemSize]="38">
+        <ng-template let-option pTemplate="item">
+          <p-tag [severity]="option.value" [value]="option.label"></p-tag>
+        </ng-template>
+      </p-dropdown>
+      </div>
+
+      <div class="field">
+        <p-dropdown [options]="tagList" [(ngModel)]="selectedTag" placeholder="Select a tag">
+          <ng-template let-option pTemplate="item">
+            {{ option.TagName }}
+            
+          </ng-template>
+        </p-dropdown>
+        
+      </div>
+
+      <div class="field">
+        <span class="p-float-label">
+          <p-calendar [(ngModel)]="newTask.EndDate" inputId="taskend" [minDate]="this.currentDate"></p-calendar>
+          <label for="taskend">End Task Date</label>
+
+      </span>
+ 
+      </div>
+
+  
+
+    </ng-template>
+    
+    <ng-template pTemplate="footer">
+      <button pButton pRipple label="Cancel" icon="pi pi-times" class="p-button-text p-button-danger" (click)="hideDialog()"></button>
+      <button pButton pRipple label="Save" icon="pi pi-check" class="p-button-text p-button-success" (click)="addTask()"></button>
+    </ng-template>
+  </p-dialog>
+
+
+  <!-- Dialog adaugare tag -->
+  <p-dialog [(visible)]="addTagDialog" [style]="{ width: '500px', height:'280px'}" header="Create your own tag's" [modal]="true" styleClass="p-fluid">
+    <ng-template pTemplate="content">
+      
+      <div class="field">
+
+        <span class="p-float-label mt-5">
+          <input pInputText id="tagname" [(ngModel)]="newTag.TagName" required autofocus />
+          <small class="p-error" *ngIf="submitted && !newTag.TagName">Tag name is required.</small>
+          <label for="taskname">Tag name</label>
+      </span>
+      </div>
+      
+    </ng-template>
+    
+    <ng-template pTemplate="footer">
+      <button pButton pRipple label="Cancel" icon="pi pi-times" class="p-button-text p-button-danger" (click)="hideDialog()"></button>
+      <button pButton pRipple label="Save" icon="pi pi-check" class="p-button-text p-button-success" (click)="addTag()"></button>
+    </ng-template>
+  </p-dialog>
+
+
+
+  <p-dialog [(visible)]="editTaskDialog" [style]="{ width: '600px', height:'700px'}" header="Edit Task Details" [modal]="true" styleClass="p-fluid">
+    <ng-template pTemplate="content">
+      
+      <div class="field">
+        <label for="name">Task</label>
+        <input type="text" pInputText id="taskName" maxlength="30"  placeholder="Task" [(ngModel)]="newTask.TaskName" required autofocus />
+        <small class="p-error" *ngIf="submitted && !newTask.TaskName">Task name is required.</small>
+      </div>
+      
+      <div class="field">
+        <p-calendar class="max-w-full" [(ngModel)]="newTask.EndDate" [minDate]="this.currentDate" [inline]="true" [showWeek]="true"></p-calendar>  
+      </div>
+    </ng-template>
+    
+    <ng-template pTemplate="footer">
+      <button pButton pRipple label="Cancel" icon="pi pi-times" class="p-button-text p-button-danger" (click)="hideDialog()"></button>
+      <button pButton pRipple label="Save" icon="pi pi-check" class="p-button-text p-button-success "></button>
+    </ng-template>
+  </p-dialog>
+
+
+</div>
+
+<p-confirmDialog></p-confirmDialog>

@@ -58,14 +58,14 @@
                         <!-- a checkbox to select the specific list of lists -->
                         <p-tableCheckbox [value]="list"></p-tableCheckbox>
                     </td>
-                    <td>{{ list.listName }}</td>
+                    <td><b>{{ list.listName }}</b></td>
                     <td>
-                        <p-tag [value]="list.description"></p-tag>
+                        <p-tag [style]="{ 'background': 'linear-gradient(-225deg,#AC32E4 0%,#7918F2 48%,#4801FF 100%)', 'font-size': '13px' }" [value]="list.description"></p-tag>
                     </td>
                     <!-- show td with list.startdate but to show format yyyy/mm/dd -->
                     <td>{{ formatDate(list.startDate)}}</td>
                     <td>
-                        <button pButton pRipple icon="pi pi-eye" class="p-button-rounded p-button-warning mr-2"></button>
+                        <button pButton pRipple icon="pi pi-eye" routerLink="/tasklist/{{list.listId}}" class="p-button-rounded p-button-warning mr-2"></button>
                         <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-success mr-2" (click)="showEditDialog(list)"></button>
                         <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-danger" (click)="confirmDelete(list)"></button>
                     </td>
@@ -82,14 +82,30 @@
         <ng-template pTemplate="content">
             
             <div class="field">
-                <label for="name">Name</label>
+
+                <span class="p-float-label mt-5">
+                    <input pInputText id="taskname" [(ngModel)]="newList.ListName" required autofocus />
+                    <small class="p-error" *ngIf="submitted && !newList.ListName">List name is required.</small>
+                    <label for="taskname">List Name</label>
+                </span>
+                
+
+
+
+                <!-- <label for="name">Name</label>
                 <input type="text" pInputText id="listName" maxlength="30"  placeholder="My first list" [(ngModel)]="newList.ListName" required autofocus />
-                <small class="p-error" *ngIf="submitted && !newList.ListName">List name is required.</small>
+                <small class="p-error" *ngIf="submitted && !newList.ListName">List name is required.</small> -->
             </div>
             
-            <div class="field">
-                <label for="description">Description</label>
-                <textarea id="description" [(ngModel)]="newList.Description" style="resize: none; width: 400px; height: 150px;" pInputTextarea required rows="3" cols="20" maxlength="50" placeholder="This is my first list!"></textarea>
+            <div class="field mt-5">
+
+                <span class="p-float-label">
+                    <textarea id="float-input" rows="5" cols="30" pInputTextarea [(ngModel)]="newList.Description" style="resize: none; width: 400px; height: 150px;"></textarea>
+                    <label for="float-input">List description</label>
+                </span>
+
+                <!-- <label for="description">Description</label>
+                <textarea id="description" [(ngModel)]="newList.Description" style="resize: none; width: 400px; height: 150px;" pInputTextarea required rows="3" cols="20" maxlength="50" placeholder="This is my first list!"></textarea> -->
             
             </div>
         </ng-template>

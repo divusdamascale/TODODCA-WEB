@@ -6,6 +6,8 @@ import { LoginComponentComponent } from './components/auth/login-component/login
 import { SingupComponent } from './components/auth/singup/singup.component';
 import { ListComponent } from './list/list/list.component';
 import { AuthGuard } from './guards/auth.guard';
+import { TasklistComponent } from './components/tasklist/tasklist.component';
+
 
 
 const routes: Routes = [
@@ -13,7 +15,8 @@ const routes: Routes = [
   { path: 'login', component: LoginComponentComponent, canActivate:[AuthGuard]},
   { path: 'signup', component: SingupComponent, canActivate: [AuthGuard]},
   { path: 'list', component: ListComponent, canActivate: [NeAuthGuard]},
-  
+  { path: 'tasklist/:listId', component:TasklistComponent, canActivate: [NeAuthGuard]},
+
 ];
 
 @NgModule({
